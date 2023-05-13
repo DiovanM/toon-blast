@@ -16,4 +16,10 @@ public class TileBase : MonoBehaviour
 
     public TextMeshProUGUI label;
 
+    public void AddBlock(BlockBase block)
+    {
+        block.transform.SetParent(transform, false);
+        currentBlock = block;
+    }
+
 }

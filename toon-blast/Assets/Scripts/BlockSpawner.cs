@@ -7,15 +7,13 @@ using DG.Tweening;
 public class BlockSpawner : MonoBehaviour
 {
 
+    public Transform blocksParent;
     [SerializeField] private List<Transform> points;
-    [SerializeField] private List<NormalBlock> blocksPrefabs;
-    [SerializeField] private Ease lerpEase;
-    [SerializeField] private Transform blocksParent;
 
-    [SerializeField] private float columnDistance = 60f;
-
-    public void SpawnBlock(Vector2 position, int column, Action<NormalBlock> onFinish)
+    public NormalBlock SpawnBlock(int column, Action<NormalBlock> onFinish)
     {
+
+        var blocksPrefabs = GameSettings.GameConfig.normalBlocks;
 
         var prefab = blocksPrefabs[UnityEngine.Random.Range(0, blocksPrefabs.Count)];
         var startPosition = points[column].position;
@@ -24,12 +22,13 @@ public class BlockSpawner : MonoBehaviour
         block.transform.position = startPosition;
         block.Setup();
 
-        onFinish?.Invoke(block);
-
+        return block;
     }
 
     public void SpawnBlocks(TileBase[] tiles, int column, Action<Vector2Int, NormalBlock> onFinish)
     {
+
+        var blocksPrefabs = GameSettings.GameConfig.normalBlocks;
 
         var startPosition = points[column].position;
 

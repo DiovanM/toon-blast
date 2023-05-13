@@ -33,5 +33,26 @@ public class GridController : MonoBehaviour
 
     }
 
+    private void Start()
+    {
+        SetupLevel();
+    }
+
+    private void SetupLevel()
+    {
+
+        var levelData = GameSettings.GameConfig.levelDataReader.levelsData[0];
+
+        foreach (var item in levelData.data)
+        {
+
+            var block = Instantiate(item.Value, transform);
+            block.Setup();
+            var tile = grid[item.Key];
+
+            tile.AddBlock(block);
+        }
+
+    }
 
 }
