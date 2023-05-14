@@ -9,7 +9,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f547b3fa749fc3d459a2c5e0baa06f76, type: 3}
+  m_Script: {fileID: 11500000, guid: b0e8123816345fa43bccd74bf240efcc, type: 3}
   m_Name: LevelDataReader
   m_EditorClassIdentifier: 
   keyBlockMap:
@@ -53,7 +53,10 @@ MonoBehaviour:
   levelsDataFiles:
   - {fileID: 4900000, guid: 85635edb43ddd434d8a06cd592f2d8c1, type: 3}
   levelsData:
-  - data:
+  - goalBlock: {fileID: -3508731054541505164, guid: c6fa67c93b34c424b9588b8e2b126474, type: 3}
+    goalValue: 72
+    moves: 36
+    data:
       reorderableList:
         canAdd: 0
         canRemove: 0

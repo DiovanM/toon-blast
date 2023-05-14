@@ -35,7 +35,13 @@ public class LevelDataReaderSOEditor : Editor
 
             var rows = file.text.Split("\n");
 
-            for (int i = 0; i < 9; i++)
+            var header = rows[0].Split(",");
+
+            levelData.goalBlock = dataReader.keyBlockMap[header[0]];
+            levelData.goalValue = int.Parse(header[1]);
+            levelData.moves = int.Parse(header[2]);
+
+            for (int i = 1; i < 10; i++)
             {
 
                 var row = rows[i].Split(",");
@@ -47,7 +53,7 @@ public class LevelDataReaderSOEditor : Editor
 
                     var block = dataReader.keyBlockMap[cell.ToString()];
 
-                    levelData.data.Add(new Vector2Int(j, 8 - i), block);
+                    levelData.data.Add(new Vector2Int(j, 9 - i), block);
                 }
 
             }

@@ -2,17 +2,14 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class LevelData1 : MonoBehaviour
+[CreateAssetMenu(fileName = "LevelDataReader", menuName = "Level Data Reader")]
+public class LevelDataReaderSO : ScriptableObject
 {
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
 
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
+    public StringBlockBaseDictionary keyBlockMap;
+
+    public List<TextAsset> levelsDataFiles;
+
+    public List<LevelData> levelsData;
+
 }

@@ -8,8 +8,10 @@ using DG.Tweening;
 public class GridController : MonoBehaviour
 {
 
+    public static Action onPerformMove;
     public static Action<TileBase> onAddBlock;
     public static Action<TileBase> onClickTile;
+    public static Action<TileBase> onBlockDestroyed;
 
     public static Action<TileBase> updateTile;
 
@@ -22,6 +24,13 @@ public class GridController : MonoBehaviour
 
     private void Awake()
     {
+        onPerformMove = null;
+        onAddBlock = null;
+        onClickTile = null;
+        onBlockDestroyed = null;
+
+        GameController.levelFailed += () => clickEnabled = false;
+        GameController.finishLevel += () => clickEnabled = false;
 
         var tilesQueue = new Queue<TileBase>(tiles);
 
@@ -35,13 +44,22 @@ public class GridController : MonoBehaviour
 
                 var coordinate = new Vector2Int(j, i);
 
+                tile.pointerHandler.onPointerClick += (e) =>
+                {
+                    if (clickEnabled)
+                        onPerformMove?.Invoke();
+                };
+
                 tile.onBlockClicked = (t) =>
                 {
                     if(clickEnabled)
                         onClickTile?.Invoke(t);
                 };
                 tile.coordinate = coordinate;
-                tile.label.text = coordinate.ToString();
+                tile.onBlockDestroyed = (t) => 
+                {
+                    onBlockDestroyed?.Invoke(t);
+                };
                 grid.Add(coordinate, tile);
             }
         }
