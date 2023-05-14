@@ -20,14 +20,13 @@ public class NormalBlock : BlockBase
     public Sprite bombSprite;
     public Sprite globeSprite;
 
+    [HideInInspector] public ReadyState readyState;
+    [HideInInspector] public List<TileBase> adjacentTiles = new();
+
     public override void Setup()
     {
         image.sprite = startingSprite;
-    }
-
-    public override void UpdateBlock()
-    {
-        throw new System.NotImplementedException();
+        readyState = ReadyState.normal;
     }
 
     public override void OnNeighbourDestroyed()
@@ -37,7 +36,8 @@ public class NormalBlock : BlockBase
 
     public override void Destroy()
     {
-        throw new System.NotImplementedException();
+        onDestroy?.Invoke();
+        Destroy(gameObject);
     }
 
     public override void OnClick()
@@ -63,6 +63,8 @@ public class NormalBlock : BlockBase
                 image.sprite = startingSprite;
                 break;
         }
+
+        readyState = state;
     }
 
 

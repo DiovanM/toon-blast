@@ -11,23 +11,20 @@ public class BalloonBlock : BlockBase
     {
         image.sprite = startingSprite;
     }
+
     public override void OnNeighbourDestroyed()
     {
         Destroy();
     }
 
-    public override void UpdateBlock()
-    {
-        throw new NotImplementedException();
-    }
-
     public override void Destroy()
     {
         Destroy(gameObject);
+        onDestroy?.Invoke();
     }
 
     public override void OnClick()
     {
-        throw new NotImplementedException();
+
     }
 }

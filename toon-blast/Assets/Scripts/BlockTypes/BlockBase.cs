@@ -15,6 +15,9 @@ public enum BlockType
 public abstract class BlockBase : MonoBehaviour
 {
 
+    public Action onClick;
+    public Action onDestroy;
+
     [HideInInspector] public bool updated;
     public bool stationary;
 
@@ -24,7 +27,6 @@ public abstract class BlockBase : MonoBehaviour
     public Sprite startingSprite;
 
     public abstract void Setup();
-    public abstract void UpdateBlock();
     public abstract void OnClick();
     public abstract void OnNeighbourDestroyed();
     public abstract void Destroy();

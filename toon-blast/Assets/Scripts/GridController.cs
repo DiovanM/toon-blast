@@ -8,6 +8,7 @@ public class GridController : MonoBehaviour
 {
 
     public static Action<TileBase> onAddBlock;
+    public static Action<TileBase> onClickTile;
 
     [SerializeField] private List<TileBase> tiles;
     [SerializeField] private BlockSpawner blockSpawner;
@@ -29,13 +30,12 @@ public class GridController : MonoBehaviour
 
                 var coordinate = new Vector2Int(j, i);
 
+                tile.onBlockClicked = onClickTile;
                 tile.coordinate = coordinate;
                 tile.label.text = coordinate.ToString();
                 grid.Add(coordinate, tile);
             }
         }
-
-        onAddBlock += OnAddBlock;
 
     }
 
@@ -62,38 +62,49 @@ public class GridController : MonoBehaviour
 
     }
 
-    private void OnAddBlock(TileBase tile)
+    public void DestroyedBlocks(List<TileBase> tiles)
     {
-
-        if (tile.currentBlock is not NormalBlock)
-            return;
-
-        var adjacentEqualBlocks = GetAllAdjacentEqualBlocks(tile.coordinate, tile.currentBlock.blockId);
-
-        var blocksAmount = adjacentEqualBlocks.Count;
-
-        NormalBlock.ReadyState updatedState;
-
-        if (blocksAmount >= GameSettings.GameConfig.globeCondition)
-            updatedState = NormalBlock.ReadyState.globe;
-        else if (blocksAmount >= GameSettings.GameConfig.bombCondition)
-            updatedState = NormalBlock.ReadyState.bomb;
-        else if (blocksAmount >= GameSettings.GameConfig.rocketCondition)
-            updatedState = NormalBlock.ReadyState.rocket;
-        else if (blocksAmount >= GameSettings.GameConfig.destroyCondition)
-            updatedState = NormalBlock.ReadyState.destroyable;
-        else
-            updatedState = NormalBlock.ReadyState.normal;
-
-        adjacentEqualBlocks.ForEach(t =>
-        {
-            ((NormalBlock)t.currentBlock).SetState(updatedState);
-            t.busy = false;
-        });
 
     }
 
-    private List<TileBase> GetAllAdjacentEqualBlocks(Vector2Int coordinate, string blockId)
+    public List<TileBase> GetAdjacentTiles(Vector2Int coordinate)
+    {
+        var tiles = new List<TileBase>();
+
+        if (grid.TryGetValue(coordinate + Vector2Int.left, out var left))
+            tiles.Add(left);
+        if (grid.TryGetValue(coordinate + Vector2Int.right, out var right))
+            tiles.Add(right);
+        if (grid.TryGetValue(coordinate + Vector2Int.up, out var up))
+            tiles.Add(up);
+        if (grid.TryGetValue(coordinate + Vector2Int.down, out var down))
+            tiles.Add(down);
+
+        return tiles;
+    }
+
+    public List<TileBase> GetDifferentAdjacentTiles(TileBase tile)
+    {
+        var tiles = new List<TileBase>();
+        var blockId = tile.currentBlock.blockId;
+
+        if (grid.TryGetValue(tile.coordinate + Vector2Int.left, out var left))
+            if(left.currentBlock != null && left.currentBlock.blockId != blockId)
+                tiles.Add(left);
+        if (grid.TryGetValue(tile.coordinate + Vector2Int.right, out var right))
+            if(right.currentBlock != null && right.currentBlock.blockId != blockId)
+                tiles.Add(right);
+        if (grid.TryGetValue(tile.coordinate + Vector2Int.up, out var up))
+            if (up.currentBlock != null && up.currentBlock.blockId != blockId)
+                tiles.Add(up);
+        if (grid.TryGetValue(tile.coordinate + Vector2Int.down, out var down))
+            if (down.currentBlock != null && down.currentBlock.blockId != blockId)
+                tiles.Add(down);
+
+        return tiles;
+    }
+
+    public List<TileBase> GetAllAdjacentEqualBlocks(Vector2Int coordinate, string blockId)
     {
 
         var equalTiles = new List<TileBase>();
@@ -106,7 +117,7 @@ public class GridController : MonoBehaviour
         return equalTiles;
     }
 
-    private List<TileBase> GetAdjacentBlocksOfId(Vector2Int coordinate, string blockId)
+    public List<TileBase> GetAdjacentBlocksOfId(Vector2Int coordinate, string blockId)
     {
 
         var equalTiles = new List<TileBase>();

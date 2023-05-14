@@ -1,14 +1,14 @@
+using System;
 using UnityEngine;
-using UnityEngine.Events;
 using UnityEngine.EventSystems;
 
 public class PointerHandler : MonoBehaviour, IPointerClickHandler, IPointerDownHandler, IPointerUpHandler, IBeginDragHandler, IDragHandler
 {
-    public UnityEvent<PointerEventData> onPointerClick;
-    public UnityEvent<PointerEventData> onPointerDown;
-    public UnityEvent<PointerEventData> onPointerUp;
-    public UnityEvent<PointerEventData> onBeginDrag;
-    public UnityEvent<PointerEventData> onDrag;
+    public Action<PointerEventData> onPointerClick;
+    public Action<PointerEventData> onPointerDown;
+    public Action<PointerEventData> onPointerUp;
+    public Action<PointerEventData> onBeginDrag;
+    public Action<PointerEventData> onDrag;
 
     public void OnPointerClick(PointerEventData eventData)
     {
