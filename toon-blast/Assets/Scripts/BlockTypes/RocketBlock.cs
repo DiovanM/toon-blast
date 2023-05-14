@@ -27,11 +27,6 @@ public class RocketBlock : BlockBase
         }
     }
 
-    public override void OnClick()
-    {
-        throw new System.NotImplementedException();
-    }
-
     public override void OnNeighbourDestroyed()
     {
 

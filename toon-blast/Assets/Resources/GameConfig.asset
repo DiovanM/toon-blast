@@ -20,6 +20,41 @@ MonoBehaviour:
   horizontalRocket: {fileID: 8347049929357019554, guid: eaffaafc87427e345b167432157f8cf3, type: 3}
   verticalRocket: {fileID: 8347049929357019554, guid: 74c3d95b5eb78e94f88f6503aa7beeae, type: 3}
   bomb: {fileID: 7410540447258346742, guid: 599524962b583b44191801843fbb7fdf, type: 3}
+  globeBlocks:
+    reorderableList:
+      canAdd: 1
+      canRemove: 1
+      draggable: 1
+      expandable: 1
+      multipleSelection: 1
+      isExpanded: 1
+      label:
+        m_Text: Keys
+        m_Image: {fileID: 0}
+        m_Tooltip: 
+      headerHeight: 18
+      footerHeight: 13
+      slideEasing: 0.15
+      verticalSpacing: 2
+      showDefaultBackground: 1
+      elementDisplayType: 0
+      elementNameProperty: 
+      elementNameOverride: 
+      elementIcon: {fileID: 0}
+    reqReferences: {fileID: 0}
+    isExpanded: 1
+    _keyValues:
+    - yellow
+    - red
+    - blue
+    _keys:
+    - yellow
+    - red
+    - blue
+    _values:
+    - {fileID: 3352963021503000293, guid: ee2ba8f5254602940876f736e7732cc7, type: 3}
+    - {fileID: 3352963021503000293, guid: 81c126b7b998a5e4099942b3b7f9ac12, type: 3}
+    - {fileID: 3352963021503000293, guid: d58147436f30c3042a694b25e506ca7b, type: 3}
   destroyCondition: 2
   rocketCondition: 5
   bombCondition: 7

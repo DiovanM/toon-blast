@@ -267,4 +267,22 @@ public class GridController : MonoBehaviour
         return equalTiles;
     }
 
+    public List<TileBase> GetTilesOfId(string blockId)
+    {
+
+        var tiles = new List<TileBase>();
+
+        foreach(var item in grid)
+        {
+            if(item.Value.currentBlock != null)
+            {
+                if (item.Value.currentBlock.blockId == blockId)
+                    tiles.Add(item.Value);
+            }
+        }
+
+        return tiles;
+
+    }
+
 }

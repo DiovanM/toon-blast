@@ -22,9 +22,4 @@ public class BalloonBlock : BlockBase
         Destroy(gameObject);
         onDestroy?.Invoke();
     }
-
-    public override void OnClick()
-    {
-
-    }
 }

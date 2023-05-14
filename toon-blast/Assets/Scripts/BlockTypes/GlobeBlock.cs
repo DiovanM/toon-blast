@@ -2,8 +2,10 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class BombBlock : BlockBase
+public class GlobeBlock : BlockBase
 {
+
+    public string normalBlockId;
 
     private bool fired;
 

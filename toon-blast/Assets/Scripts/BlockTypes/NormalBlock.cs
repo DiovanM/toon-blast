@@ -40,11 +40,6 @@ public class NormalBlock : BlockBase
         Destroy(gameObject);
     }
 
-    public override void OnClick()
-    {
-        throw new NotImplementedException();
-    }
-
     public void SetState(ReadyState state)
     {
         switch(state)

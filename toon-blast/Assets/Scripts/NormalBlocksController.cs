@@ -149,6 +149,35 @@ public class NormalBlocksController : MonoBehaviour
                 }
                 break;
             case NormalBlock.ReadyState.globe:
+                {
+                    var differentAdjacentTiles = new List<TileBase>();
+
+                    block.adjacentTiles.Remove(tile);
+
+                    block.adjacentTiles.ForEach(t =>
+                    {
+                        differentAdjacentTiles.AddRange(gridController.GetDifferentAdjacentTiles(t));
+                        t.currentBlock.Destroy();
+                    });
+
+                    differentAdjacentTiles.ForEach(t =>
+                    {
+                        if (t.currentBlock != null)
+                        {
+                            t.currentBlock.OnNeighbourDestroyed();
+                        }
+                    });
+
+                    block.Destroy();
+
+                    var globePrefab = GameSettings.GameConfig.globeBlocks[block.blockId];
+
+                    var globe = Instantiate(globePrefab, tile.transform);
+                    globe.Setup();
+                    tile.AddBlock(globe);
+
+                    gridController.UpdateGrid();
+                }
                 break;
         }
 

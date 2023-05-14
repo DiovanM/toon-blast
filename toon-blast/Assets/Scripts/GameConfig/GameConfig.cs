@@ -15,6 +15,8 @@ public class GameConfig : ScriptableObject
 
     public BombBlock bomb;
 
+    public StringGlobeBlockDictionary globeBlocks;
+
     public int destroyCondition = 2;
     public int rocketCondition = 5;
     public int bombCondition = 7;

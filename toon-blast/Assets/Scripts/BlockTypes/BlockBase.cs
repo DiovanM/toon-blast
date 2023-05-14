@@ -28,7 +28,6 @@ public abstract class BlockBase : MonoBehaviour
     public Sprite startingSprite;
 
     public abstract void Setup();
-    public abstract void OnClick();
     public abstract void OnNeighbourDestroyed();
     public abstract void Destroy();
 

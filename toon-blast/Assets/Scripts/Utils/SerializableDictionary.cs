@@ -8,4 +8,7 @@ using UnityEngine;
 public class StringBlockBaseDictionary : SerializableDictionaryBase<string, BlockBase> { }
 
 [Serializable]
+public class StringGlobeBlockDictionary : SerializableDictionaryBase<string, GlobeBlock> { }
+
+[Serializable]
 public class CoordinateBlockBaseDictionary : SerializableDictionaryBase<Vector2Int, BlockBase> { }
