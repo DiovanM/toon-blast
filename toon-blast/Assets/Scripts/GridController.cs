@@ -165,13 +165,16 @@ public class GridController : MonoBehaviour
     {
         foreach(var item in grid)
         {
-            item.Value.currentBlock.updated = false;
+            if(item.Value.currentBlock != null)
+                item.Value.currentBlock.updated = false;
         }
 
         foreach (var item in grid)
         {
             updateTile?.Invoke(item.Value);
         }
+
+        clickEnabled = true;
     }
 
     public List<TileBase> GetAdjacentTiles(Vector2Int coordinate)

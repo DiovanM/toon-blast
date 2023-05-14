@@ -34,6 +34,7 @@ public class TileBase : MonoBehaviour
         currentBlock = block;
 
         currentBlock.onDestroy = OnBlockDestroyed;
+        currentBlock.onActivate = () => onBlockClicked?.Invoke(this);
     }
 
     public void RemoveBlock()

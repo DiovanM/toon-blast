@@ -17,6 +17,7 @@ public abstract class BlockBase : MonoBehaviour
 
     public Action onClick;
     public Action onDestroy;
+    public Action onActivate;
 
     [HideInInspector] public bool updated;
     public bool stationary;

@@ -10,6 +10,9 @@ public class GameConfig : ScriptableObject
 
     public List<NormalBlock> normalBlocks;
 
+    public RocketBlock horizontalRocket;
+    public RocketBlock verticalRocket;
+
     public int destroyCondition = 2;
     public int rocketCondition = 5;
     public int bombCondition = 7;

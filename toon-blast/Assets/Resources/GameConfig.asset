@@ -17,6 +17,8 @@ MonoBehaviour:
   - {fileID: 4845272275961995587, guid: d5d6833ede87a924abdf9c9691435d8e, type: 3}
   - {fileID: 4845272275961995587, guid: 8273c38daff31c946bd73f9100c4d53c, type: 3}
   - {fileID: 4845272275961995587, guid: c2411020fb29ff84b99073dc5293e060, type: 3}
+  horizontalRocket: {fileID: 8347049929357019554, guid: eaffaafc87427e345b167432157f8cf3, type: 3}
+  verticalRocket: {fileID: 8347049929357019554, guid: 74c3d95b5eb78e94f88f6503aa7beeae, type: 3}
   destroyCondition: 2
   rocketCondition: 5
   bombCondition: 7

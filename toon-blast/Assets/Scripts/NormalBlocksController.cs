@@ -89,6 +89,35 @@ public class NormalBlocksController : MonoBehaviour
                 }
                 break;
             case NormalBlock.ReadyState.rocket:
+                {
+                    var differentAdjacentTiles = new List<TileBase>();
+
+                    block.adjacentTiles.Remove(tile);
+
+                    block.adjacentTiles.ForEach(t =>
+                    {
+                        differentAdjacentTiles.AddRange(gridController.GetDifferentAdjacentTiles(t));
+                        t.currentBlock.Destroy();
+                    });
+
+                    differentAdjacentTiles.ForEach(t =>
+                    {
+                        if (t.currentBlock != null)
+                        {
+                            t.currentBlock.OnNeighbourDestroyed();
+                        }
+                    });
+
+                    block.Destroy();
+
+                    var rocketPrefab = Random.Range(0, 2) == 0 ? GameSettings.GameConfig.horizontalRocket : GameSettings.GameConfig.verticalRocket;
+
+                    var rocket = Instantiate(rocketPrefab, tile.transform);
+                    rocket.Setup();
+                    tile.AddBlock(rocket);
+
+                    gridController.UpdateGrid();
+                }
                 break;
             case NormalBlock.ReadyState.bomb:
                 break;

@@ -11590,6 +11590,7 @@ GameObject:
   m_Component:
   - component: {fileID: 2115740341}
   - component: {fileID: 2115740342}
+  - component: {fileID: 2115740343}
   m_Layer: 0
   m_Name: BlocksControllers
   m_TagString: Untagged
@@ -11622,6 +11623,19 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 6e816ca5ad701184e920554cbab2bf30, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  gridController: {fileID: 1863881449}
+--- !u!114 &2115740343
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2115740340}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 979eb75753341e84c862cf81b9b67298, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   gridController: {fileID: 1863881449}
