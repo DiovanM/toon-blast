@@ -27,16 +27,21 @@ public class GameController : MonoBehaviour
 
         GridController.onPerformMove += OnPerformMove;
         GridController.onBlockDestroyed += OnBlockDestroyed;
+
+        GameAnalyticsSDK.GameAnalytics.NewProgressionEvent(GameAnalyticsSDK.GAProgressionStatus.Start, "Level_1");
     }
 
     private void OnPerformMove()
     {
         movesCounter--;
 
-        if(movesCounter <= 0)
+        if (movesCounter <= 0)
         {
             if (goalCounter >= 0)
+            {
                 levelFailed?.Invoke();
+                GameAnalyticsSDK.GameAnalytics.NewProgressionEvent(GameAnalyticsSDK.GAProgressionStatus.Fail, "Level_1");
+            }
         }
 
     }
@@ -49,7 +54,10 @@ public class GameController : MonoBehaviour
         goalCounter--;
 
         if (goalCounter <= 0)
+        {
             finishLevel?.Invoke();
+            GameAnalyticsSDK.GameAnalytics.NewProgressionEvent(GameAnalyticsSDK.GAProgressionStatus.Complete, "Level_1");
+        }
     }
 
 }

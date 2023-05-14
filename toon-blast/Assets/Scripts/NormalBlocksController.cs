@@ -116,6 +116,8 @@ public class NormalBlocksController : MonoBehaviour
                     rocket.Setup();
                     tile.AddBlock(rocket);
 
+                    GameAnalyticsSDK.GameAnalytics.NewDesignEvent("Booster_Rocket");
+
                     gridController.UpdateGrid();
                 }
                 break;
@@ -144,6 +146,8 @@ public class NormalBlocksController : MonoBehaviour
                     var bomb = Instantiate(GameSettings.GameConfig.bomb, tile.transform);
                     bomb.Setup();
                     tile.AddBlock(bomb);
+
+                    GameAnalyticsSDK.GameAnalytics.NewDesignEvent("Booster_Bomb");
 
                     gridController.UpdateGrid();
                 }
@@ -175,6 +179,8 @@ public class NormalBlocksController : MonoBehaviour
                     var globe = Instantiate(globePrefab, tile.transform);
                     globe.Setup();
                     tile.AddBlock(globe);
+
+                    GameAnalyticsSDK.GameAnalytics.NewDesignEvent("Booster_Globe");
 
                     gridController.UpdateGrid();
                 }
