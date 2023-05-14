@@ -120,6 +120,33 @@ public class NormalBlocksController : MonoBehaviour
                 }
                 break;
             case NormalBlock.ReadyState.bomb:
+                {
+                    var differentAdjacentTiles = new List<TileBase>();
+
+                    block.adjacentTiles.Remove(tile);
+
+                    block.adjacentTiles.ForEach(t =>
+                    {
+                        differentAdjacentTiles.AddRange(gridController.GetDifferentAdjacentTiles(t));
+                        t.currentBlock.Destroy();
+                    });
+
+                    differentAdjacentTiles.ForEach(t =>
+                    {
+                        if (t.currentBlock != null)
+                        {
+                            t.currentBlock.OnNeighbourDestroyed();
+                        }
+                    });
+
+                    block.Destroy();
+
+                    var bomb = Instantiate(GameSettings.GameConfig.bomb, tile.transform);
+                    bomb.Setup();
+                    tile.AddBlock(bomb);
+
+                    gridController.UpdateGrid();
+                }
                 break;
             case NormalBlock.ReadyState.globe:
                 break;

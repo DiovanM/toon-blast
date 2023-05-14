@@ -13,6 +13,8 @@ public class GameConfig : ScriptableObject
     public RocketBlock horizontalRocket;
     public RocketBlock verticalRocket;
 
+    public BombBlock bomb;
+
     public int destroyCondition = 2;
     public int rocketCondition = 5;
     public int bombCondition = 7;

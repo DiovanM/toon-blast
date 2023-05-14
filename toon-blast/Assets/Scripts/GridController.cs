@@ -193,6 +193,24 @@ public class GridController : MonoBehaviour
         return tiles;
     }
 
+    public List<TileBase> GetTilesAround(Vector2Int coordinate)
+    {
+        var tiles = new List<TileBase>();
+
+        tiles.AddRange(GetAdjacentTiles(coordinate));
+
+        if (grid.TryGetValue(coordinate + Vector2Int.up + Vector2Int.left, out var upLeft))
+            tiles.Add(upLeft);
+        if (grid.TryGetValue(coordinate + Vector2Int.up + Vector2Int.right, out var upRight))
+            tiles.Add(upRight);
+        if (grid.TryGetValue(coordinate + Vector2Int.down + Vector2Int.left, out var downLeft))
+            tiles.Add(downLeft);
+        if (grid.TryGetValue(coordinate + Vector2Int.down + Vector2Int.right, out var downRight))
+            tiles.Add(downRight);
+
+        return tiles;
+    }
+
     public List<TileBase> GetDifferentAdjacentTiles(TileBase tile)
     {
         var tiles = new List<TileBase>();
