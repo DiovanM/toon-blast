@@ -13,16 +13,21 @@ public class BalloonBlock : BlockBase
     }
     public override void OnNeighbourDestroyed()
     {
-        throw new System.NotImplementedException();
+        Destroy();
     }
 
     public override void UpdateBlock()
     {
-        throw new System.NotImplementedException();
+        throw new NotImplementedException();
     }
 
     public override void Destroy()
     {
         Destroy(gameObject);
+    }
+
+    public override void OnClick()
+    {
+        throw new NotImplementedException();
     }
 }

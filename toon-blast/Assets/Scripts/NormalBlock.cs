@@ -10,6 +10,7 @@ public class NormalBlock : BlockBase
     public enum ReadyState
     {
         normal,
+        destroyable,
         rocket,
         bomb,
         globe
@@ -18,11 +19,6 @@ public class NormalBlock : BlockBase
     public Sprite rocketSprite;
     public Sprite bombSprite;
     public Sprite globeSprite;
-
-    public int destroyCondition = 3;
-    public int rocketCondition = 5;
-    public int bombCondition = 7;
-    public int globeCondition = 9;
 
     public override void Setup()
     {
@@ -43,4 +39,31 @@ public class NormalBlock : BlockBase
     {
         throw new System.NotImplementedException();
     }
+
+    public override void OnClick()
+    {
+        throw new NotImplementedException();
+    }
+
+    public void SetState(ReadyState state)
+    {
+        switch(state)
+        {
+            case ReadyState.rocket:
+                image.sprite = rocketSprite;
+                break;
+            case ReadyState.bomb:
+                image.sprite = bombSprite;
+                break;
+            case ReadyState.globe:
+                image.sprite = globeSprite;
+                break;
+            case ReadyState.destroyable:
+            case ReadyState.normal:
+                image.sprite = startingSprite;
+                break;
+        }
+    }
+
+
 }

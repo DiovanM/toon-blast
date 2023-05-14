@@ -5281,7 +5281,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &780509143
 RectTransform:
   m_ObjectHideFlags: 0
@@ -6002,6 +6002,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e13ec2f300dede74a8dd6d8f25deada5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  blocksParent: {fileID: 1074378003}
   points:
   - {fileID: 3986166999994742599}
   - {fileID: 3986166998708857138}
@@ -6012,9 +6013,6 @@ MonoBehaviour:
   - {fileID: 3986166999505075845}
   - {fileID: 3986166999226972881}
   - {fileID: 3986167000418419595}
-  lerpEase: 1
-  blocksParent: {fileID: 1074378003}
-  columnDistance: 60
 --- !u!1 &933279721
 GameObject:
   m_ObjectHideFlags: 0
@@ -12650,6 +12648,7 @@ MonoBehaviour:
   pointerHandler: {fileID: 330514285288138202}
   currentBlock: {fileID: 0}
   label: {fileID: 0}
+  busy: 0
 --- !u!114 &7484382951895742067
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -12666,6 +12665,7 @@ MonoBehaviour:
   pointerHandler: {fileID: 330514285281708279}
   currentBlock: {fileID: 0}
   label: {fileID: 0}
+  busy: 0
 --- !u!114 &7484382952152936999
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -12682,6 +12682,7 @@ MonoBehaviour:
   pointerHandler: {fileID: 330514285556141219}
   currentBlock: {fileID: 0}
   label: {fileID: 0}
+  busy: 0
 --- !u!114 &7484382952399067217
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -12698,6 +12699,7 @@ MonoBehaviour:
   pointerHandler: {fileID: 330514285785048789}
   currentBlock: {fileID: 0}
   label: {fileID: 0}
+  busy: 0
 --- !u!114 &7484382952435609977
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -12714,6 +12716,7 @@ MonoBehaviour:
   pointerHandler: {fileID: 330514285815746557}
   currentBlock: {fileID: 0}
   label: {fileID: 0}
+  busy: 0
 --- !u!114 &7484382952708858308
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -12730,6 +12733,7 @@ MonoBehaviour:
   pointerHandler: {fileID: 330514286078582592}
   currentBlock: {fileID: 0}
   label: {fileID: 0}
+  busy: 0
 --- !u!114 &7484382953142569853
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -12746,6 +12750,7 @@ MonoBehaviour:
   pointerHandler: {fileID: 330514284500612601}
   currentBlock: {fileID: 0}
   label: {fileID: 0}
+  busy: 0
 --- !u!114 &7484382953263784555
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -12762,6 +12767,7 @@ MonoBehaviour:
   pointerHandler: {fileID: 330514284378479855}
   currentBlock: {fileID: 0}
   label: {fileID: 0}
+  busy: 0
 --- !u!114 &7484382953532587953
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -12778,3 +12784,4 @@ MonoBehaviour:
   pointerHandler: {fileID: 330514284647334197}
   currentBlock: {fileID: 0}
   label: {fileID: 0}
+  busy: 0

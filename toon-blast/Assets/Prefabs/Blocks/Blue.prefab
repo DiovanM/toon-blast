@@ -60,16 +60,14 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   updated: 0
+  stationary: 0
+  blockId: blue
+  image: {fileID: 3381587836539502353}
   type: 0
   startingSprite: {fileID: 21300000, guid: f777f346b9f49da47ac2c8d1e18bb596, type: 3}
-  image: {fileID: 3381587836539502353}
   rocketSprite: {fileID: 21300000, guid: 2c74d510677cb7343b9a1da87a053dd3, type: 3}
   bombSprite: {fileID: 21300000, guid: ce1d657c0505d6a4ebf67f97d6c64f8e, type: 3}
   globeSprite: {fileID: 21300000, guid: 992c84556a3b7904780ff2ba4ecc49c4, type: 3}
-  destroyCondition: 3
-  rocketCondition: 5
-  bombCondition: 7
-  globeCondition: 9
 --- !u!114 &3381587836539502353
 MonoBehaviour:
   m_ObjectHideFlags: 0

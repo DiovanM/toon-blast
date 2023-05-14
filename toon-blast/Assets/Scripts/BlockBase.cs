@@ -18,16 +18,15 @@ public abstract class BlockBase : MonoBehaviour
     [HideInInspector] public bool updated;
     public bool stationary;
 
+    public string blockId;
     public Image image;
     public BlockType type;
     public Sprite startingSprite;
 
     public abstract void Setup();
-
     public abstract void UpdateBlock();
-
+    public abstract void OnClick();
     public abstract void OnNeighbourDestroyed();
-
     public abstract void Destroy();
 
 }
