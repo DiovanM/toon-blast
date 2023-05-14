@@ -10,7 +10,7 @@ public class BlockSpawner : MonoBehaviour
     public Transform blocksParent;
     [SerializeField] private List<Transform> points;
 
-    public NormalBlock SpawnBlock(int column, Action<NormalBlock> onFinish)
+    public NormalBlock SpawnBlock(int column)
     {
 
         var blocksPrefabs = GameSettings.GameConfig.normalBlocks;

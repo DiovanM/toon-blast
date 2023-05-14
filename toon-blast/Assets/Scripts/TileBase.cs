@@ -29,17 +29,22 @@ public class TileBase : MonoBehaviour
 
     public void AddBlock(BlockBase block)
     {
-        block.transform.SetParent(transform, false);
+        block.transform.SetParent(transform);
+        block.transform.localPosition = Vector3.zero;
         currentBlock = block;
 
         currentBlock.onDestroy = OnBlockDestroyed;
     }
 
+    public void RemoveBlock()
+    {
+        currentBlock = null;
+    }
+
     private void OnBlockDestroyed()
     {
         onBlockDestroyed?.Invoke(this);
-        currentBlock = null;
-        pointerHandler.onPointerClick = null;
+        RemoveBlock();
     }
 
 }

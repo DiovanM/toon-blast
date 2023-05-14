@@ -11,14 +11,18 @@ public class NormalBlocksController : MonoBehaviour
 
     private void Awake()
     {
-        GridController.onAddBlock += OnAddBlock;
+        GridController.onAddBlock += UpdateTiles;
+        GridController.updateTile += UpdateTiles;
         GridController.onClickTile += OnClickTile;
     }
 
-    private void OnAddBlock(TileBase tile)
+    private void UpdateTiles(TileBase tile)
     {
 
         if (tile.currentBlock is not NormalBlock)
+            return;
+
+        if (tile.currentBlock.updated)
             return;
 
         var adjacentEqualBlocks = gridController.GetAllAdjacentEqualBlocks(tile.coordinate, tile.currentBlock.blockId);
@@ -43,6 +47,7 @@ public class NormalBlocksController : MonoBehaviour
             var normalBlock = (NormalBlock)t.currentBlock;
             normalBlock.SetState(updatedState);
             normalBlock.adjacentTiles = adjacentEqualBlocks;
+            normalBlock.updated = true;
             t.busy = false;
         });
 
@@ -80,7 +85,7 @@ public class NormalBlocksController : MonoBehaviour
                         }
                     });
 
-                    //gridController.DestroyedBlocks(block.adjacentTiles);
+                    gridController.UpdateGrid();
                 }
                 break;
             case NormalBlock.ReadyState.rocket:

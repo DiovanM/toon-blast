@@ -3,6 +3,7 @@ using System.Linq;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using DG.Tweening;
 
 public class GridController : MonoBehaviour
 {
@@ -10,10 +11,14 @@ public class GridController : MonoBehaviour
     public static Action<TileBase> onAddBlock;
     public static Action<TileBase> onClickTile;
 
+    public static Action<TileBase> updateTile;
+
     [SerializeField] private List<TileBase> tiles;
     [SerializeField] private BlockSpawner blockSpawner;
 
     public Dictionary<Vector2Int, TileBase> grid = new ();
+
+    private bool clickEnabled;
 
     private void Awake()
     {
@@ -30,7 +35,11 @@ public class GridController : MonoBehaviour
 
                 var coordinate = new Vector2Int(j, i);
 
-                tile.onBlockClicked = onClickTile;
+                tile.onBlockClicked = (t) =>
+                {
+                    if(clickEnabled)
+                        onClickTile?.Invoke(t);
+                };
                 tile.coordinate = coordinate;
                 tile.label.text = coordinate.ToString();
                 grid.Add(coordinate, tile);
@@ -60,11 +69,109 @@ public class GridController : MonoBehaviour
             onAddBlock?.Invoke(tile);
         }
 
+        clickEnabled = true;
+
     }
 
-    public void DestroyedBlocks(List<TileBase> tiles)
+    public void UpdateGrid()
     {
 
+        clickEnabled = false;
+
+        var tilesToUpdate = 0;
+
+        for (int i = 0; i < 9; i++)
+        {
+
+            var emptyTiles = new List<TileBase>();
+            var tilesToMove = new List<TileBase>();
+
+            for (int j = 0; j < 9; j++)
+            {
+
+                var tile = grid[new Vector2Int(i, j)];
+
+                if (tile.currentBlock == null)
+                    emptyTiles.Add(tile);
+                else if (emptyTiles.Count > 0)
+                    tilesToMove.Add(tile);
+
+                if(j == 8)
+                {
+                    tilesToUpdate += emptyTiles.Count + tilesToMove.Count;
+
+                    if(emptyTiles.Count > 0)
+                    {
+                        var startingCoordinate = emptyTiles[0].coordinate;
+
+                        var l = 0;
+                        for (int k = startingCoordinate.y; k < 9; k++)
+                        {
+                            var targetCoordinate = startingCoordinate;
+                            targetCoordinate.y += l;
+
+                            var target = grid[targetCoordinate];
+
+                            if (l > tilesToMove.Count - 1)
+                            {
+                                var newBlock = blockSpawner.SpawnBlock(targetCoordinate.x);
+
+                                newBlock.transform.DOMove(target.transform.position, .2f)
+                                    .SetEase(Ease.Linear)
+                                    .OnComplete(() =>
+                                    {
+                                        target.AddBlock(newBlock);
+
+                                        tilesToUpdate--;
+                                        if (tilesToUpdate == 0)
+                                            UpdateBlocks();
+                                    });
+                            }
+                            else
+                            {
+
+                                var tileToMove = tilesToMove[l];
+
+                                var block = tileToMove.currentBlock;
+                                tileToMove.RemoveBlock();
+
+                                block.transform.DOMove(target.transform.position, .2f)
+                                    .SetEase(Ease.Linear)
+                                    .OnComplete(() =>
+                                    {
+                                        target.AddBlock(block);
+
+                                        tilesToUpdate--;
+                                        if (tilesToUpdate == 0)
+                                            UpdateBlocks();
+                                    });
+                            }
+                            l++;
+                        }
+                    }
+                    else
+                    {
+                        clickEnabled = true;
+                    }
+
+                }
+
+            }
+        }
+
+    }
+
+    public void UpdateBlocks()
+    {
+        foreach(var item in grid)
+        {
+            item.Value.currentBlock.updated = false;
+        }
+
+        foreach (var item in grid)
+        {
+            updateTile?.Invoke(item.Value);
+        }
     }
 
     public List<TileBase> GetAdjacentTiles(Vector2Int coordinate)
